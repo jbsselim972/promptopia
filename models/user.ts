@@ -1,9 +1,16 @@
+import { Document } from "mongodb";
 import { Schema, model, models } from "mongoose";
 
-const UserSchema = new Schema({
+export interface IUser extends Document {
+  email: string;
+  username: string;
+  image?: string;
+}
+
+const UserSchema = new Schema<IUser>({
   email: {
     type: String,
-    unique: [true, "Email already exists"],
+    unique: true,
     required: [true, "Email is required"],
   },
   username: {
